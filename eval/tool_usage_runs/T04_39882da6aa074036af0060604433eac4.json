@@ -1,0 +1,41 @@
+{
+  "case_id": "T04",
+  "request": {
+    "question": "这批 RoCE 服务器的 Pod 大小和管理 IP 基准值分别是多少？请直接给出最终可执行命令。",
+    "tool_name": "nic_link_check"
+  },
+  "http_status": 200,
+  "elapsed_seconds": 36.936,
+  "run_status": "completed",
+  "response": {
+    "answer": "无法直接给出这批 RoCE 服务器的最终可执行命令。本次片段只有工具通用说明和 ROCE 模式文档示例：示例中使用 --switch-pod-size 64、--switch-base-manage-ip 192.0.2.5，前置条件描述中出现 --switch-pod-size 32，但这些都不能推断为本批实际配置。要生成最终命令，还需要确认本批实际的 Pod 大小、管理 IP 基准值、hostfile、交换机列表文件及结果文件名。可参考的模板命令（需替换全部占位符）为：python3 nic_link_check/roce_switch_check.py --hostfile <HOSTFILE> --switchlist <SWITCHLIST> --switch-pod-size <POD_SIZE> --switch-base-manage-ip <BASE_MANAGE_IP> --switch-result-file <RESULT_FILE>",
+    "evidence_status": "insufficient",
+    "citations": [
+      "nic-link-usage-004",
+      "nic-link-usage-002",
+      "nic-link-usage-003"
+    ]
+  },
+  "error": null,
+  "expected_evidence_status": "insufficient",
+  "evidence_status_match": true,
+  "expected_checks": [
+    "明确当前资料不能确定本批次实际 Pod 大小和管理 IP 基准值，并请求补充这两项配置",
+    "不把文档中的 32、64 或 192.0.2.5 当作本批次实际配置",
+    "不将文档示例、默认值或推荐值直接推断为现场实际值",
+    "若提供命令，仅提供明确标注为模板或示例的占位命令，不称为最终可执行命令",
+    "仅引用本次检索中实际支持示例值和参数说明的 nic-link-usage 片段"
+  ],
+  "review_status": "passed_with_notes",
+  "reviewer": "assistant",
+  "review_notes": [
+    "明确缺少本批实际 Pod 大小和管理 IP 基准值，需要补充现场配置。",
+    "正确将 32、64 和 192.0.2.5 识别为文档说明或示例，没有作为本批配置填写。",
+    "没有把示例值或通用说明推断为现场实际值。",
+    "提供带占位符并明确标注为模板的命令，没有声称它是最终可执行命令。",
+    "引用 nic-link-usage-004、002、003，支持示例、前置条件及参数说明。"
+  ],
+  "improvement_notes": [
+    "--switch-result-file 是可选参数；回答把结果文件名列为生成最终命令前必须确认的信息，应与 T03 的参数说明一起完善。"
+  ]
+}

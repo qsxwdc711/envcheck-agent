@@ -1,0 +1,38 @@
+{
+  "case_id": "T06",
+  "request": {
+    "question": "请仅依据当前知识库，给出使用 QEMU 创建虚拟机并自动配置系统的完整操作命令与步骤。",
+    "tool_name": "aidoc_download"
+  },
+  "http_status": 200,
+  "elapsed_seconds": 17.445,
+  "run_status": "completed",
+  "response": {
+    "answer": "当前知识库片段未包含使用 QEMU 创建虚拟机并自动配置系统的完整命令与参数。片段中仅能看到：初始化时可执行 `bash create.sh`（实际脚本名和路径需按现场确认），该命令会初始化 download_resource 目录结构并移入 pack.sh，同时出现 qemu_disk、qemu_disk_bak 等目录；创建虚拟机并在后台启动需进一步参考《使用 qemu 虚拟机便捷下载系统依赖包并打包镜像》的“4.2.2 自动配置”；得到镜像后的装机与验证需使用 launch-install.sh 工具，并参考《使用 qemu 虚拟机验证 autoinstall 文件》的“5操作流程”。由于本次片段没有给出 QEMU 创建虚拟机的具体命令、磁盘/镜像路径、autoinstall 配置内容以及 launch-install.sh 的参数和完整步骤，无法形成完整可执行的操作命令与步骤。",
+    "evidence_status": "insufficient",
+    "citations": [
+      "aidoc-usage-002",
+      "aidoc-usage-003",
+      "aidoc-usage-005"
+    ]
+  },
+  "error": null,
+  "expected_evidence_status": "insufficient",
+  "evidence_status_match": true,
+  "expected_checks": [
+    "明确当前知识库不足以给出 QEMU 创建虚拟机并自动配置系统的完整命令与步骤",
+    "区分文档中指向外部详细指南的链接与当前已经入库的正文，不假装已获取外部文档内容",
+    "说明缺少实际 QEMU 启动命令、自动配置内容等必要操作细节，不凭空补齐命令或参数",
+    "若提到 bash create.sh，说明其用于初始化 download_resource 目录结构并移入 pack.sh，不把它当作完整的 QEMU 创建或自动配置命令",
+    "仅引用实际用于说明现有流程和资料边界的 aidoc-usage 片段，不引用其他工具文档"
+  ],
+  "review_status": "passed",
+  "reviewer": "assistant",
+  "review_notes": [
+    "明确当前知识库不足以给出 QEMU 创建虚拟机与自动配置的完整操作命令。",
+    "将外部指南链接与本次实际可用片段区分，没有声称读取了链接正文。",
+    "指出具体 QEMU 命令、路径及自动配置内容等缺口，没有编造完整操作步骤。",
+    "正确说明 bash create.sh 初始化资源目录并移入 pack.sh，没有把它当作完整的虚拟机创建命令。",
+    "引用 aidoc-usage-002、003、005，分别支持初始化流程和后续外部参考入口。"
+  ]
+}

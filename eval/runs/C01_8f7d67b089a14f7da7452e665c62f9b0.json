@@ -1,0 +1,12 @@
+{
+  "case_id": "C01",
+  "question": "请查询巡检记录 1002，说明总体结果及各检查项是否通过。",
+  "answer": "已查询到巡检记录 1002，结果如下：\n\n**总体结果：通过（pass）**\n\n- 巡检执行状态：completed（本次巡检执行已完成）\n- overall_result：pass（本次基线检查通过）\n\n**各检查项：**\n\n| 检查项 | 实际值 | 配置期望值 | 结果 |\n|--------|--------|-----------|------|\n| os_version | Ubuntu 22.04.5 LTS | Ubuntu 22.04.5 LTS | pass（通过） |\n| kernel_version | Linux 5.15.0-119-generic | Linux 5.15.0-119-generic | pass（通过） |\n\n两个检查项均通过，实际值与配置期望值一致，无异常错误信息。",
+  "run_status": "completed",
+  "error": null,
+  "elapsed_seconds": 6.158,
+  "repeat_index": 2,
+  "expected_checks": [
+    "说明本次基线通过，不编造异常。"
+  ]
+}

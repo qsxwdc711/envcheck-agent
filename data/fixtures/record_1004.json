@@ -1,0 +1,24 @@
+{
+  "sample_type": "synthetic",
+  "record_id": 1004,
+  "server_id": 101,
+  "server_name": "demo-node-01",
+  "checked_at": "2026-10-19T10:00:00+08:00",
+  "check_status": "failed",
+  "overall_result": "error",
+  "checks": [
+    {
+      "name": "os_version",
+      "actual": "Ubuntu 22.04.5 LTS",
+      "expected": "Ubuntu 22.04.5 LTS",
+      "result": "pass"
+    },
+    {
+      "name": "gpu_count",
+      "actual": null,
+      "expected": 8,
+      "result": "error"
+    }
+  ],
+  "error_message": "GPU 数量采集失败，实际值缺失；已保留系统版本采集结果。"
+}

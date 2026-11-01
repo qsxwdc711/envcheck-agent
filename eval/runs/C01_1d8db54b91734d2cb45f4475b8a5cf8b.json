@@ -1,0 +1,12 @@
+{
+  "case_id": "C01",
+  "question": "请查询巡检记录 1002，说明总体结果及各检查项是否通过。",
+  "answer": "巡检记录 1002 的查询结果如下：\n\n**总体情况**\n- 服务器：demo-node-01（编号 101）\n- 检查时间：2026-10-19 10:00:00 +08:00\n- 巡检执行状态（check_status）：completed（巡检执行完成）\n- 总体结果（overall_result）：pass（本次基线检查通过）\n\n**各检查项结果**\n\n| 检查项 | 实际值 | 配置期望值 | 结果 |\n|--------|--------|------------|------|\n| os_version（操作系统版本） | Ubuntu 22.04.5 LTS | Ubuntu 22.04.5 LTS | pass（通过） |\n| kernel_version（内核版本） | Linux 5.15.0-119-generic | Linux 5.15.0-119-generic | pass（通过） |\n\n两个检查项均通过，实际值与配置期望值一致，且本次巡检执行完成，因此总体结果判定为通过。",
+  "run_status": "completed",
+  "error": null,
+  "elapsed_seconds": 7.233,
+  "repeat_index": 1,
+  "expected_checks": [
+    "说明本次基线通过，不编造异常。"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "chunk_id": "sop-kernel-001",
+  "source": "data/source_docs/inspection_sop.md",
+  "section": "验证服务器系统、内核版本一致且符合要求",
+  "source_type": "report_template",
+  "content": "验证服务器系统、内核版本一致且符合要求。\n测试方法:hostnamectl | grep Kernel | cut -d: -f2 | xargs\ncat /etc/os-release\n测试结果:OS:\nKERNEL:",
+  "platform": "nvidia"
+}

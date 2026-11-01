@@ -1,0 +1,32 @@
+{
+  "case_id": "T05",
+  "request": {
+    "question": "按照文档，系统编号 240404 对应的虚拟机端口是多少？",
+    "tool_name": "aidoc_download"
+  },
+  "http_status": 200,
+  "elapsed_seconds": 5.186,
+  "run_status": "completed",
+  "response": {
+    "answer": "按照文档，系统编号 240404 对应的虚拟机端口是 10022。",
+    "evidence_status": "sufficient",
+    "citations": [
+      "aidoc-usage-004"
+    ]
+  },
+  "error": null,
+  "expected_evidence_status": "sufficient",
+  "evidence_status_match": true,
+  "expected_checks": [
+    "准确回答系统编号 240404 对应的虚拟机端口为 10022",
+    "引用 aidoc-usage-004",
+    "不混入无关片段引用，也不补充无依据的现场配置"
+  ],
+  "review_status": "passed",
+  "reviewer": "assistant",
+  "review_notes": [
+    "准确回答系统编号 240404 对应端口 10022。",
+    "仅引用直接支持该映射的 aidoc-usage-004。",
+    "没有添加无依据的现场配置或无关片段引用。"
+  ]
+}

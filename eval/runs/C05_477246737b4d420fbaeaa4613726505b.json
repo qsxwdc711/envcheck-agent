@@ -1,0 +1,12 @@
+{
+  "case_id": "C05",
+  "question": "请仅依据 ascend 平台的 SOP，说明如何查看 NPU 型号和驱动版本。",
+  "answer": "未能从 ascend 平台的 SOP 中检索到关于查看 NPU 型号和驱动版本的内容，返回结果为空（`data` 为空数组），因此没有依据可以说明具体方法。\n\n建议您：\n- 确认查询关键词或平台名称（例如是否应为 `ascend` 的其他写法）；\n- 或提供更具体的检查项名称，我再帮您检索对应 SOP。",
+  "run_status": "completed",
+  "error": null,
+  "elapsed_seconds": 7.03,
+  "repeat_index": 1,
+  "expected_checks": [
+    "空检索时说明资料不足，不使用 NVIDIA 文档或编造命令。"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "case_id": "T01",
+  "request": {
+    "question": "如何把 getinfo 采集生成的 SOP JSON 转换成 Word 报告？",
+    "tool_name": "getinfo"
+  },
+  "http_status": 200,
+  "elapsed_seconds": 34.165,
+  "run_status": "completed",
+  "response": {
+    "answer": "使用 sop_json_to_md.py 并加上 --docx 参数。必填 --json 指向 getinfo 采集生成的 *_sop.json；通过 --output 指定 Markdown 输出路径，生成的 Word 文档会在同一目录下生成同名的 .docx。命令模板如下：\n\npython3 sop_json_to_md.py --json <实际采集生成的*_sop.json> --output <报告名.md> --docx --reference-doc template_docx.docx\n\n其中 <实际采集生成的*_sop.json> 和 <报告名.md> 需要按实际文件名替换；如果不需要指定参考文档，可以去掉 --reference-doc template_docx.docx。若需要按期望规则输出通过/未通过，可加 --expect <期望规则文件.json>；若需要指定模板，可加 --template <模板.md>。不加 --output 时，默认 Markdown 名为 <json文件名>_report.md，加 --docx 后会生成同目录同名 .docx。",
+    "evidence_status": "sufficient",
+    "citations": [
+      "getinfo-usage-002",
+      "getinfo-usage-006"
+    ]
+  },
+  "error": null,
+  "expected_evidence_status": "sufficient",
+  "evidence_status_match": true,
+  "expected_checks": [
+    "说明使用 sop_json_to_md.py，通过 --json 指定实际采集生成的 *_sop.json，并加 --docx 生成 Word",
+    "提供命令模板或示例，并明确示例文件名和路径需要按实际情况替换",
+    "若说明期望规则参数，使用报告脚本的 --expect，不混用采集脚本的 --expect-file",
+    "说明 Word 文件与 Markdown 输出文件同目录、同名且扩展名为 .docx",
+    "引用实际支持回答的片段，Word 生成方法应有 getinfo-usage-006 支持"
+  ],
+  "review_status": "passed",
+  "reviewer": "assistant",
+  "review_notes": [
+    "正确使用 sop_json_to_md.py、--json 和 --docx 完成 SOP JSON 到 Word 的通用指导。",
+    "命令明确标为模板，并说明实际输入与输出文件名需要替换。",
+    "报告期望规则使用 --expect，没有混用采集脚本的 --expect-file。",
+    "正确说明 Word 与 Markdown 输出同目录、同名且扩展名为 .docx。",
+    "引用 getinfo-usage-002 和 006，支持脚本用途及报告生成说明。"
+  ]
+}

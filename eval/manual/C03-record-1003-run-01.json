@@ -1,0 +1,89 @@
+{
+  "case_id": "C03",
+  "case_name": "SSH/采集失败，没有有效硬件数据",
+  "run_number": 1,
+  "capture_method": "人工转录用户粘贴的真实控制台输出；未由助手再次请求模型",
+  "input_question_snapshot": {
+    "text": "请查询巡检记录 1003，说明巡检是否完成、能否判断服务器是否达标，并给出记录中的依据。",
+    "source": "本轮读取的 tool_call_demo.py 中保存的 user.content",
+    "captured_in_execution_log": false,
+    "note": "当前保存的问题与本次任务一致，但输入正文未在用户提交日志中回显，不将源码快照当作运行时抓取。"
+  },
+  "sample_type": "synthetic",
+  "text_model_requests": [
+    {
+      "index": 1,
+      "max_requests": 3,
+      "tool_choice": "auto",
+      "returned_tool_calls": [
+        {
+          "id": "call_xesmyj82zbndf8g58unpgnpy",
+          "type": "function",
+          "function": {
+            "name": "get_check_record",
+            "arguments": "{\"record_id\": 1003}"
+          }
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "max_requests": 3,
+      "tool_choice": "auto",
+      "returned_tool_calls": null
+    }
+  ],
+  "tool_executions": [
+    {
+      "tool_call_id": "call_xesmyj82zbndf8g58unpgnpy",
+      "name": "get_check_record",
+      "arguments": {
+        "record_id": 1003
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "sample_type": "synthetic",
+          "record_id": 1003,
+          "server_id": 101,
+          "server_name": "demo-node-01",
+          "checked_at": "2026-10-19T10:00:00+08:00",
+          "check_status": "failed",
+          "overall_result": "error",
+          "checks": [],
+          "error_message": "SSH connection timed out"
+        },
+        "error": null
+      }
+    }
+  ],
+  "roles_after_tool": [
+    "system",
+    "user",
+    "assistant",
+    "tool"
+  ],
+  "retrieved_chunks": [],
+  "final_answer": "## 巡检记录 1003 查询结果\n\n**巡检是否完成：未完成。**\n\n记录显示：\n- 巡检状态（`check_status`）：`failed`（失败）\n- 总体结果（`overall_result`）：`error`（错误）\n- 检查项列表（`checks`）：为空 `[]`，即没有任何检查项的实际执行结果\n- 失败原因（`error_message`）：`SSH connection timed out`（SSH 连接超时）\n\n**能否判断服务器是否达标：不能。**\n\n由于本次巡检在连接阶段就因 SSH 超时而失败，没有采集到任何检查项数据（`checks` 为空），因此**没有依据**可以判断该服务器是否达标。\n\n**记录中的依据：**\n- `check_status = \"failed\"`\n- `overall_result = \"error\"`\n- `checks = []`\n- `error_message = \"SSH connection timed out\"`\n\n如需进一步判断该服务器是否达标，需要先解决 SSH 连接问题并重新执行巡检，采集到实际检查项数据后再对照 SOP 判断。",
+  "elapsed_seconds": null,
+  "text_model_id": null,
+  "review": {
+    "status": "pass",
+    "checks": {
+      "correct_record_id": true,
+      "lookup_success_separate_from_collection_failure": true,
+      "failed_error_status_preserved": true,
+      "indeterminate_compliance_from_empty_checks": true,
+      "no_fabricated_hardware_values_or_zero_counts": true,
+      "no_speculative_ssh_root_cause": true,
+      "no_sop_retrieval": true,
+      "early_completion_after_two_text_requests": true
+    },
+    "limitations": [
+      "仅当前合成样例的一次真实运行，不代表重复稳定性或整体准确率。",
+      "SSH 超时是记录提供的错误，输出没有验证具体网络、认证或 SSH 服务根因，也没有实际重新巡检。",
+      "用户日志未提供耗时或文本模型标识，相关字段留空。",
+      "本文件为人工验收证据，不是自动化回放脚本或底层 HTTP 日志。"
+    ]
+  }
+}

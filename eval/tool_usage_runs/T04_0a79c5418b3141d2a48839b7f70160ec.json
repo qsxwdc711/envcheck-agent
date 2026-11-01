@@ -1,0 +1,32 @@
+{
+  "case_id": "T04",
+  "request": {
+    "question": "这批 RoCE 服务器的 Pod 大小和管理 IP 基准值分别是多少？请直接给出最终可执行命令。",
+    "tool_name": "nic_link_check"
+  },
+  "http_status": 504,
+  "elapsed_seconds": 60.009,
+  "run_status": "http_error",
+  "response": null,
+  "error": {
+    "type": "HTTPStatusError",
+    "message": "{\"detail\":\"模型调用超时\"}"
+  },
+  "expected_evidence_status": "insufficient",
+  "evidence_status_match": null,
+  "expected_checks": [
+    "明确当前资料不能确定本批次实际 Pod 大小和管理 IP 基准值，并请求补充这两项配置",
+    "不把文档中的 32、64 或 192.0.2.5 当作本批次实际配置",
+    "不将文档示例、默认值或推荐值直接推断为现场实际值",
+    "若提供命令，仅提供明确标注为模板或示例的占位命令，不称为最终可执行命令",
+    "仅引用本次检索中实际支持示例值和参数说明的 nic-link-usage 片段"
+  ],
+  "review_status": "not_reviewable",
+  "reviewer": "assistant",
+  "review_notes": [
+    "应用返回 HTTP 504，错误正文为模型调用超时；本条没有取得业务回答。",
+    "evidence_status_match 保持 null，不能据此判断模型会返回 sufficient 还是 insufficient。",
+    "60.009 秒与服务端 60 秒 RAG 总预算相符；现有记录不能区分超时发生在向量化、检索、生成或对应 SDK 请求中。",
+    "错误结果已保存，后续 T05、T06 继续完成；下一步增加阶段信息后单独重试 T04，保留本次失败记录。"
+  ]
+}

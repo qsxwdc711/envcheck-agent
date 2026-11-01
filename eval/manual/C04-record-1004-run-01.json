@@ -1,0 +1,103 @@
+{
+  "case_id": "C04",
+  "case_name": "部分采集成功，但实际 GPU 数量缺失",
+  "run_number": 1,
+  "capture_method": "人工转录用户粘贴的真实控制台输出；未由助手再次请求模型",
+  "input_question_snapshot": {
+    "text": "请查询巡检记录 1004，分别说明已知的系统版本、实际 GPU 数量，以及能否确认 GPU 数量满足配置要求。",
+    "source": "本轮读取的 tool_call_demo.py 中保存的 user.content",
+    "captured_in_execution_log": false,
+    "note": "当前源码快照，不是底层请求日志。"
+  },
+  "sample_type": "synthetic",
+  "text_model_requests": [
+    {
+      "index": 1,
+      "max_requests": 3,
+      "tool_choice": "auto",
+      "returned_tool_calls": [
+        {
+          "id": "call_shrdvlxtlobs1ot4mf8eri2v",
+          "type": "function",
+          "function": {
+            "name": "get_check_record",
+            "arguments": "{\"record_id\": 1004}"
+          }
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "max_requests": 3,
+      "tool_choice": "auto",
+      "returned_tool_calls": null
+    }
+  ],
+  "tool_executions": [
+    {
+      "tool_call_id": "call_shrdvlxtlobs1ot4mf8eri2v",
+      "name": "get_check_record",
+      "arguments": {
+        "record_id": 1004
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "sample_type": "synthetic",
+          "record_id": 1004,
+          "server_id": 101,
+          "server_name": "demo-node-01",
+          "checked_at": "2026-10-19T10:00:00+08:00",
+          "check_status": "failed",
+          "overall_result": "error",
+          "checks": [
+            {
+              "name": "os_version",
+              "actual": "Ubuntu 22.04.5 LTS",
+              "expected": "Ubuntu 22.04.5 LTS",
+              "result": "pass"
+            },
+            {
+              "name": "gpu_count",
+              "actual": null,
+              "expected": 8,
+              "result": "error"
+            }
+          ],
+          "error_message": "GPU 数量采集失败，实际值缺失；已保留系统版本采集结果。"
+        },
+        "error": null
+      }
+    }
+  ],
+  "roles_after_tool": [
+    "system",
+    "user",
+    "assistant",
+    "tool"
+  ],
+  "retrieved_chunks": [],
+  "final_answer": "已查询到巡检记录 1004，结果如下：\n\n**1. 已知的系统版本**\n- 实际值：`Ubuntu 22.04.5 LTS`\n- 期望值：`Ubuntu 22.04.5 LTS`\n- 结果：通过（pass）\n\n**2. 实际 GPU 数量**\n- 实际值：缺失（`null`）\n- 期望值：`8`\n- 结果：错误（error）\n- 记录备注：`GPU 数量采集失败，实际值缺失；已保留系统版本采集结果。`\n\n**3. 能否确认 GPU 数量满足配置要求**\n- **不能确认**。配置期望值为 8，但由于 GPU 数量采集失败、实际值缺失，无法将实际数量与期望值进行比对，因此不能确认是否满足配置要求。该检查项结果被标记为 error，整条记录状态为 failed。\n\n补充说明：以上内容均来自巡检记录 1004 的返回数据，未涉及对检查方法或验收要求的 SOP 检索，因为该问题仅需依据记录内容回答。",
+  "elapsed_seconds": null,
+  "text_model_id": null,
+  "review": {
+    "status": "pass",
+    "checks": {
+      "correct_record_id": true,
+      "known_os_value_preserved": true,
+      "missing_gpu_count_not_replaced_with_zero": true,
+      "expected_count_not_treated_as_actual": true,
+      "cannot_confirm_gpu_count_compliance": true,
+      "partial_data_not_discarded": true,
+      "no_unnecessary_sop_search": true,
+      "two_text_requests_and_one_tool_execution": true
+    },
+    "limitations": [
+      "测试数据为学习用合成记录，不证明真实 envcheck 已按此格式导出部分结果。",
+      "本次覆盖 actual=null；尚未在此例单独验证 actual 键完全缺失的变体。",
+      "单次人工回放，不代表重复稳定性或整体准确率。",
+      "日志未提供耗时和文本模型标识，相关字段留空。",
+      "本文件为人工验收证据，不是自动化评测脚本。"
+    ]
+  }
+}

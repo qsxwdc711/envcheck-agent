@@ -1,0 +1,37 @@
+{
+  "case_id": "T02",
+  "request": {
+    "question": "我这批服务器应该选 B300 还是 H100 的项目期望配置？请直接给出最终可执行的报告生成命令。",
+    "tool_name": "getinfo"
+  },
+  "http_status": 200,
+  "elapsed_seconds": 23.041,
+  "run_status": "completed",
+  "response": {
+    "answer": "根据当前资料，无法判断您这批服务器应选 B300 还是 H100 的项目期望配置。资料中只给出了两个示例项目的对应配置：示例项目A B300 使用 example/projects/example-b300.json，示例项目B H100 使用 example/projects/example-h100.json，但没有说明您当前批次或服务器对应哪一个项目。\n\n要生成最终可执行命令，还需要您确认：\n1. 当前项目/批次名称或服务器型号是 B300 还是 H100；\n2. 对应当前项目的期望配置 JSON 路径；\n3. 对应当前项目的报告模板路径；\n4. getinfo.py 采集后实际生成的 *_sop.json 文件名。\n\n以下仅为模板命令，不能作为最终可执行命令，需替换 <...> 中的实际值：\n\n若确认为示例项目A B300 项目：\npython3 sop_json_to_md.py --json <实际采集生成的_sop.json> --expect example/projects/example-b300.json --template example/projects/report_template_B300.md --output <输出文件名>.md --docx --reference-doc template_docx.docx\n\n若确认为示例项目B H100 项目：\npython3 sop_json_to_md.py --json <实际采集生成的_sop.json> --expect example/projects/example-h100.json --template example/projects/report_template_H100.md --output <输出文件名>.md --docx --reference-doc template_docx.docx",
+    "evidence_status": "insufficient",
+    "citations": [
+      "getinfo-usage-004",
+      "getinfo-usage-006"
+    ]
+  },
+  "error": null,
+  "expected_evidence_status": "insufficient",
+  "evidence_status_match": true,
+  "expected_checks": [
+    "明确当前资料不能确定这批服务器应采用哪个项目期望配置",
+    "说明需要补充项目归属及对应配置；生成最终命令还需要实际 SOP JSON 文件路径等必要输入",
+    "不擅自选择示例项目A B300 或示例项目B H100 的配置，不将文档示例认定为本批次配置",
+    "若提供带占位符的命令，明确称为模板或示例，不称为最终可执行命令",
+    "仅引用实际支持项目配置或报告用法说明的本次检索片段"
+  ],
+  "review_status": "passed",
+  "reviewer": "assistant",
+  "review_notes": [
+    "明确现有资料不能判断当前批次应该使用 B300 还是 H100 的项目配置。",
+    "要求补充项目归属、项目期望配置、报告模板和实际 SOP JSON 文件名。",
+    "没有擅自替用户选定项目，也没有把文档示例认作当前批次输入。",
+    "两套命令均标为需替换占位符的模板，没有称为最终可执行命令。",
+    "引用 getinfo-usage-004 和 006，支持项目配置及报告生成示例。"
+  ]
+}

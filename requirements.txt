@@ -1,0 +1,6 @@
+arkruntime==0.15.0
+pydantic==2.14.1
+fastapi==0.151.0
+uvicorn==0.54.0
+qdrant-client==1.19.1
+httpx==0.28.1

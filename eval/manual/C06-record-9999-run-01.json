@@ -1,0 +1,82 @@
+{
+  "case_id": "C06",
+  "case_name": "请求的记录 ID 不存在",
+  "run_number": 1,
+  "capture_method": "人工转录用户粘贴的真实控制台输出；未由助手再次请求模型",
+  "input_question_snapshot": {
+    "text": "请查询巡检记录 9999，说明巡检结果。",
+    "source": "本轮读取的 tool_call_demo.py 中保存的 user.content",
+    "captured_in_execution_log": false,
+    "note": "输入正文未在用户日志中回显，此字段是当前源码快照。"
+  },
+  "data_source_note": "学习用本地 fixture 数据源；本轮只读确认 record_9999.json 不存在。",
+  "text_model_requests": [
+    {
+      "index": 1,
+      "max_requests": 3,
+      "tool_choice": "auto",
+      "returned_tool_calls": [
+        {
+          "id": "call_yvl4k9vxjlwzm97gbc4y7en6",
+          "type": "function",
+          "function": {
+            "name": "get_check_record",
+            "arguments": "{\"record_id\": 9999}"
+          }
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "max_requests": 3,
+      "tool_choice": "auto",
+      "returned_tool_calls": null
+    }
+  ],
+  "tool_executions": [
+    {
+      "tool_call_id": "call_yvl4k9vxjlwzm97gbc4y7en6",
+      "name": "get_check_record",
+      "arguments": {
+        "record_id": 9999
+      },
+      "result": {
+        "ok": false,
+        "data": null,
+        "error": {
+          "code": "RECORD_NOT_FOUND",
+          "message": "未找到巡检记录9999"
+        }
+      }
+    }
+  ],
+  "roles_after_tool": [
+    "system",
+    "user",
+    "assistant",
+    "tool"
+  ],
+  "retrieved_chunks": [],
+  "final_answer": "查询巡检记录 9999 失败。\n\n- 失败原因：记录不存在（`RECORD_NOT_FOUND`）\n- 错误信息：未找到巡检记录 9999\n\n这不是参数错误，而是系统中不存在编号为 9999 的巡检记录。因此我无法说明该记录的巡检结果，也不会编造任何记录内容。如需查询，请确认编号是否正确后重试。",
+  "elapsed_seconds": null,
+  "text_model_id": null,
+  "review": {
+    "status": "pass",
+    "checks": {
+      "correct_record_id": true,
+      "structured_not_found_error_preserved": true,
+      "distinguishes_not_found_from_invalid_arguments": true,
+      "no_fallback_to_another_record": true,
+      "no_sop_retrieval": true,
+      "no_fabricated_business_result": true,
+      "normal_completion_after_error_feedback": true,
+      "two_text_requests_and_one_tool_execution": true
+    },
+    "limitations": [
+      "当前多轮版本的一次真实回放，不代表重复稳定性或整体准确率。",
+      "记录不存在针对当前本地 fixture 数据源，不证明生产 envcheck 或其他数据源中也不存在该编号。",
+      "日志未提供耗时或文本模型标识，相关字段留空。",
+      "本文件为人工验收证据，不是自动化回放脚本或底层 HTTP 日志。"
+    ]
+  }
+}

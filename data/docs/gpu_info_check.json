@@ -1,0 +1,8 @@
+{
+  "chunk_id": "sop-gpu-info-001",
+  "source": "data/source_docs/inspection_sop.md",
+  "section": "检查GPU数量、型号、驱动、固件版本、cuda版本",
+  "source_type": "report_template",
+  "content": "检查GPU数量、型号、驱动、固件版本、cuda版本\n测试方法：\nnvidia-smi\nnvidia-smi --query-gpu=gpu_name,gpu_bus_id,vbios_version,driver_version,memory.total,ecc.mode.current,power.limit,persistence_mode --format=csv\nnvidia-smi -q -d SUPPORTED_CLOCKS\n测试结果：\nGPU_LIST:",
+  "platform": "nvidia"
+}

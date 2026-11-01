@@ -1,0 +1,100 @@
+{
+  "case_id": "C01",
+  "case_name": "采集成功且本次基线通过",
+  "run_number": 1,
+  "capture_method": "人工转录用户粘贴的真实控制台输出；未由助手再次请求模型",
+  "input_question_snapshot": {
+    "text": "请查询 NVIDIA 服务器的巡检记录 1002，说明未通过的检查项、实际值与期望值，再检索 SOP 给出复核方法。",
+    "source": "本轮读取的 tool_call_demo.py 中保存的 user.content",
+    "captured_in_execution_log": false,
+    "note": "该快照与此前建议的条件句不同；实际请求正文未在用户提交日志中回显，不将源码快照冒充运行时抓取。"
+  },
+  "sample_type": "synthetic",
+  "text_model_requests": [
+    {
+      "index": 1,
+      "max_requests": 3,
+      "tool_choice": "auto",
+      "returned_tool_calls": [
+        {
+          "id": "call_x94gx6mkqgtla6kric7ucman",
+          "type": "function",
+          "function": {
+            "name": "get_check_record",
+            "arguments": "{\"record_id\": 1002}"
+          }
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "max_requests": 3,
+      "tool_choice": "auto",
+      "returned_tool_calls": null
+    }
+  ],
+  "tool_executions": [
+    {
+      "tool_call_id": "call_x94gx6mkqgtla6kric7ucman",
+      "name": "get_check_record",
+      "arguments": {
+        "record_id": 1002
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "sample_type": "synthetic",
+          "record_id": 1002,
+          "server_id": 101,
+          "server_name": "demo-node-01",
+          "checked_at": "2026-10-19T10:00:00+08:00",
+          "check_status": "completed",
+          "overall_result": "pass",
+          "checks": [
+            {
+              "name": "os_version",
+              "actual": "Ubuntu 22.04.5 LTS",
+              "expected": "Ubuntu 22.04.5 LTS",
+              "result": "pass"
+            },
+            {
+              "name": "kernel_version",
+              "actual": "Linux 5.15.0-119-generic",
+              "expected": "Linux 5.15.0-119-generic",
+              "result": "pass"
+            }
+          ],
+          "error_message": ""
+        },
+        "error": null
+      }
+    }
+  ],
+  "roles_after_tool": [
+    "system",
+    "user",
+    "assistant",
+    "tool"
+  ],
+  "retrieved_chunks": [],
+  "final_answer": "查询结果如下：\n\n**巡检记录 1002（NVIDIA 服务器 demo-node-01）**\n\n- 巡检时间：2026-10-19 10:00:00（+08:00）\n- 巡检状态：已完成（completed）\n- 总体结论：**通过（pass）**\n\n**检查项明细：**\n\n| 检查项 | 实际值 | 期望值 | 结果 |\n|--------|--------|--------|------|\n| os_version | Ubuntu 22.04.5 LTS | Ubuntu 22.04.5 LTS | 通过 |\n| kernel_version | Linux 5.15.0-119-generic | Linux 5.15.0-119-generic | 通过 |\n\n**说明：**\n该记录中**不存在未通过的检查项**，所有检查项的实际值均与期望值一致，总体结论为通过。因此没有需要复核的未通过项，也无需进一步检索 SOP 复核方法。\n\n如果你需要了解某个具体检查项（如操作系统版本、内核版本等）的 SOP 检查方法或验收要求，请告诉我具体检查项，我再调用 `search_sop` 检索相关文档片段。",
+  "elapsed_seconds": null,
+  "text_model_id": null,
+  "review": {
+    "status": "pass",
+    "checks": {
+      "correct_record_id": true,
+      "record_business_result_preserved": true,
+      "actual_expected_values_preserved": true,
+      "no_fabricated_failed_items": true,
+      "no_unnecessary_sop_search": true,
+      "early_completion_after_two_text_requests": true,
+      "no_fabricated_root_cause_or_upgrade_requirement": true
+    },
+    "limitations": [
+      "仅记录当前样例的一次真实成功，不代表重复稳定性或整体准确率。",
+      "用户输出未提供耗时或文本模型标识，相关字段留空。",
+      "本文件保存请求摘要、原始工具结果与最终回答，不是自动化回放脚本或完整底层 HTTP 日志。"
+    ]
+  }
+}

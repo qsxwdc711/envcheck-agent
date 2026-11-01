@@ -1,0 +1,8 @@
+{
+  "chunk_id": "sop-time-001",
+  "source": "data/source_docs/inspection_sop.md",
+  "section": "检查集群所有节点时钟一致",
+  "source_type": "report_template",
+  "content": "检查集群所有节点时钟一致.测试方法：\ntimedatectl\n测试结果：\nTIME_INFO:",
+  "platform": "nvidia"
+}

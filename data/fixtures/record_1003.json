@@ -1,0 +1,11 @@
+{
+  "sample_type": "synthetic",
+  "record_id": 1003,
+  "server_id": 101,
+  "server_name": "demo-node-01",
+  "checked_at": "2026-10-19T10:00:00+08:00",
+  "check_status": "failed",
+  "overall_result": "error",
+  "checks": [],
+  "error_message": "SSH connection timed out"
+}

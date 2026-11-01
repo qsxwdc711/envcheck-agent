@@ -1,0 +1,12 @@
+{
+  "case_id": "C02",
+  "question": "请查询 NVIDIA 服务器的巡检记录 1001，说明未通过项的实际值和配置期望值，并检索 SOP 给出复核方法。",
+  "answer": "## 巡检记录 1001 查询结果\n\n**记录概况**\n- 服务器：demo-node-01（ID: 101）\n- 巡检执行状态：`completed`（巡检执行完成）\n- 总体结果：`fail`（已有检查结果不符合配置基线）\n\n**未通过项**\n\n| 检查项 | 实际值 | 配置期望值 | 结果 |\n|--------|--------|------------|------|\n| kernel_version（内核版本） | Linux 5.15.0-118-generic | Linux 5.15.0-119-generic | fail |\n\n另一检查项 `os_version`（系统版本）通过：实际值与期望值均为 Ubuntu 22.04.5 LTS。\n\n---\n\n## SOP 复核方法\n\n依据检索到的 SOP 片段（`sop-kernel-001`，来源为 H100 报告模板，章节“验证服务器系统、内核版本一致且符合要求”），内核版本复核方法如下：\n\n```\nhostnamectl | grep Kernel | cut -d: -f2 | xargs\ncat /etc/os-release\n```\n\n即通过 `hostnamectl` 提取内核版本信息，结合 `/etc/os-release` 确认操作系统版本，以复核实际内核版本是否与期望值一致。\n\n---\n\n## 依据说明\n\n- **实际值与期望值**：来自巡检记录 1001 的 `checks` 字段，未做任何编造。\n- **复核方法**：来自 SOP 检索片段，仅包含上述命令，未包含其他步骤。\n- **注意**：SOP 片段本身**未给出内核版本的文档规定值**（即未明确“应为 Linux 5.15.0-119-generic”），配置期望值仅以巡检记录中的 `expected` 字段为准。如需文档级的内核版本规定依据，需进一步检索相关配置规范文档。",
+  "run_status": "completed",
+  "error": null,
+  "elapsed_seconds": 18.984,
+  "repeat_index": 2,
+  "expected_checks": [
+    "正确说明内核 118 与 119 的差异；复核命令有文档依据；不把配置期望冒充文档标准，不编造根因。"
+  ]
+}

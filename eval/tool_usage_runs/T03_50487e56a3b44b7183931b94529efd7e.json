@@ -1,0 +1,42 @@
+{
+  "case_id": "T03",
+  "request": {
+    "question": "RoCE 线序检查的基础命令怎么写，需要提供哪些参数？",
+    "tool_name": "nic_link_check"
+  },
+  "http_status": 200,
+  "elapsed_seconds": 38.492,
+  "run_status": "completed",
+  "response": {
+    "answer": "RoCE 线序检查使用入口脚本 `roce_switch_check.py`。基础命令模板如下（尖括号内容需按实际替换）：\n\n```bash\npython3 nic_link_check/roce_switch_check.py --hostfile <hostfile路径> --switch-leaf-list <leaf列表文件> --switch-pod-size <每leaf对应机器数> --switch-base-manage-ip <管理IP基准值> --switch-result-file <结果JSON路径>\n```\n\n也可用 `--switchlist` 替代 `--switch-leaf-list`。\n必需/常用参数：\n- `--hostfile`：主机列表，RoCE CPU 模式需要提供路径。\n- `--switch-leaf-list` / `--switchlist`：必填，leaf 交换机列表文件，每行一个交换机名称（LLDP 上的 SysName）。\n- `--switch-pod-size`：每台 leaf 对应的机器数量，须按现场实际填写；文档示例为 32 或 64，不能作为实际值直接使用。\n- `--switch-base-manage-ip`：管理 IP 基准值，用于 index 计算，须按现场实际填写。\n- `--switch-result-file`：可选，指定结果 JSON 文件路径；省略时按所选模式自动生成结果文件。\n\n注意：RoCE 独立脚本不接受 `--check-switch-port` 和 `--switch-network-type`。如果尚未确认实际 hostfile、leaf 列表、pod 大小、管理 IP 等，上述只是模板示例，不能作为最终可执行命令。",
+    "evidence_status": "sufficient",
+    "citations": [
+      "nic-link-usage-004",
+      "nic-link-usage-002",
+      "nic-link-usage-003"
+    ]
+  },
+  "error": null,
+  "expected_evidence_status": "sufficient",
+  "evidence_status_match": true,
+  "expected_checks": [
+    "使用 RoCE 入口脚本 nic_link_check/roce_switch_check.py，提供基础命令模板或明确标注的文档示例",
+    "说明 hostfile、leaf 列表文件、Pod 大小和管理 IP 基准值等输入的含义，并要求按现场实际填写",
+    "leaf 列表参数可使用 --switchlist 或 --switch-leaf-list，不混入 RoCE 脚本不接受的 --check-switch-port 或 --switch-network-type",
+    "若使用 64、32 或 192.0.2.5 等文档数值，明确其为示例，不认定为用户现场配置",
+    "仅引用支持命令、参数和前置条件说明的 nic-link-usage 片段"
+  ],
+  "review_status": "passed",
+  "reviewer": "assistant",
+  "review_notes": [
+    "使用正确的 RoCE 入口与明确标注占位符的单行基础命令。",
+    "说明主机列表、leaf 列表、Pod 大小及管理 IP 基准值，并要求按现场实际填写。",
+    "明确两个 leaf 列表参数可以互相替代，未将不受支持的兼容开关加入命令。",
+    "明确 32 和 64 为文档示例，未作为现场值填写。",
+    "引用 nic-link-usage-004、002、003，支持命令、前置条件和修订后的参数说明。"
+  ],
+  "regression_notes": [
+    "已说明 --switchlist 可以替代 --switch-leaf-list，解决此前别名关系含糊的问题。",
+    "已明确 --switch-result-file 可选，省略时自动生成结果文件，解决此前必填与可选混淆的问题。"
+  ]
+}

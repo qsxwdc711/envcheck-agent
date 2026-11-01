@@ -1,0 +1,80 @@
+{
+  "case_id": "C05",
+  "case_name": "无适用文档的平台过滤与空检索子场景",
+  "scope": "platform_filter_and_empty_retrieval",
+  "run_number": 1,
+  "capture_method": "人工转录用户粘贴的真实控制台输出；未由助手再次请求模型",
+  "input_question_snapshot": {
+    "text": "请仅依据 ascend 平台的 SOP，说明如何查看 NPU 型号和驱动版本。如果没有适用文档，请明确说明资料不足。",
+    "source": "本轮读取的 tool_call_demo.py 中保存的 user.content",
+    "captured_in_execution_log": false,
+    "note": "当前源码快照，不是底层请求日志。"
+  },
+  "text_model_requests": [
+    {
+      "index": 1,
+      "max_requests": 3,
+      "tool_choice": "auto",
+      "returned_tool_calls": [
+        {
+          "id": "call_huoclafplt21lcqyu71ksxpk",
+          "type": "function",
+          "function": {
+            "name": "search_sop",
+            "arguments": "{\"question\": \"如何查看 NPU 型号和驱动版本\", \"platform\": \"ascend\"}"
+          }
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "max_requests": 3,
+      "tool_choice": "auto",
+      "returned_tool_calls": null
+    }
+  ],
+  "tool_executions": [
+    {
+      "tool_call_id": "call_huoclafplt21lcqyu71ksxpk",
+      "name": "search_sop",
+      "arguments": {
+        "question": "如何查看 NPU 型号和驱动版本",
+        "platform": "ascend"
+      },
+      "embedding_model_observed": "doubao-embedding-vision-250615",
+      "result": {
+        "ok": true,
+        "data": [],
+        "error": null
+      }
+    }
+  ],
+  "roles_after_tool": [
+    "system",
+    "user",
+    "assistant",
+    "tool"
+  ],
+  "retrieved_chunks": [],
+  "final_answer": "根据检索结果，ascend 平台的 SOP 中没有返回与“查看 NPU 型号和驱动版本”相关的文档片段（返回结果为空），因此资料不足，我无法仅依据 ascend 平台的 SOP 说明如何查看 NPU 型号和驱动版本。\n\n建议您提供更具体的关键词，或确认相关 SOP 是否已录入，我再为您检索。",
+  "elapsed_seconds": null,
+  "text_model_id": null,
+  "review": {
+    "status": "pass",
+    "checks": {
+      "requested_ascend_platform": true,
+      "successful_empty_result_preserved": true,
+      "insufficient_evidence_stated": true,
+      "no_nvidia_document_fallback": true,
+      "no_fabricated_source_or_command": true,
+      "two_text_requests_and_one_tool_execution": true
+    },
+    "limitations": [
+      "仅验证当前问题的 ascend 平台过滤和空检索，不证明设备型号或项目范围隔离。",
+      "本次是文档工具场景，没有联合查询巡检记录。",
+      "单次人工回放，不代表重复稳定性或整体准确率。",
+      "日志未提供耗时和文本模型标识，相关字段留空。",
+      "空结果说明本次检索没有返回片段，不外推平台本身没有任何可用检查方法。"
+    ]
+  }
+}
